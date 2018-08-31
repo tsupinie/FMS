@@ -16,6 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with FMS.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
+#ifndef __APPLE__
 #define _GNU_SOURCE
 
 #include <stdio.h>
@@ -80,3 +81,4 @@ void set_cpu_affinity( int cpu )
 }
 
 void set_cpu_affinity_(int *cpu) { set_cpu_affinity(*cpu); }	/* Fortran interface */
+#endif
