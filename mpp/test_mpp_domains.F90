@@ -159,13 +159,11 @@ program test
   end if
   call mpp_domains_set_stack_size(stackmax)
 
-#ifndef __APPLE__
 !$      call omp_set_num_threads(nthreads)
 !$      base_cpu = get_cpu_affinity()
 !$OMP PARALLEL
 !$        call set_cpu_affinity( base_cpu + omp_get_thread_num() )
 !$OMP END PARALLEL
-#endif
 
   if( pe.EQ.mpp_root_pe() )print '(a,9i6)', 'npes, mpes, nx, ny, nz, whalo, ehalo, shalo, nhalo =', &
                            npes, mpes, nx, ny, nz, whalo, ehalo, shalo, nhalo

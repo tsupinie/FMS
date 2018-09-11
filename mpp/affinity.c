@@ -16,7 +16,6 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with FMS.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
-#ifndef __APPLE__
 #define _GNU_SOURCE
 
 #include <stdio.h>
@@ -30,9 +29,14 @@
 
 static pid_t gettid(void)
 {
+#ifdef __APPLE__
+  return syscall(SYS_gettid);
+#else
   return syscall(__NR_gettid);
+#endif
 }
 
+#ifndef __APPLE__
 /*
  * Returns this thread's CPU affinity, if bound to a single core,
  * or else -1.

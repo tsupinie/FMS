@@ -1656,13 +1656,11 @@ if( mod( ny_dom, window(2) ) .NE. 0 ) call error_mesg('test_data_override', &
         "ny_dom is not divisible by window(2)", FATAL)
 
 nwindows = window(1)*window(2)
-#ifndef __APPLE__
 !$ call omp_set_num_threads(nthreads)
 !$ base_cpu = get_cpu_affinity()
 !$OMP PARALLEL
 !$ call set_cpu_affinity( base_cpu + omp_get_thread_num() )
 !$OMP END PARALLEL
-#endif
 
 nx_win = nx_dom/window(1)
 ny_win = ny_dom/window(2)
