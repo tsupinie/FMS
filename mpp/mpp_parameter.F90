@@ -1,3 +1,21 @@
+!***********************************************************************
+!*                   GNU Lesser General Public License
+!*
+!* This file is part of the GFDL Flexible Modeling System (FMS).
+!*
+!* FMS is free software: you can redistribute it and/or modify it under
+!* the terms of the GNU Lesser General Public License as published by
+!* the Free Software Foundation, either version 3 of the License, or (at
+!* your option) any later version.
+!*
+!* FMS is distributed in the hope that it will be useful, but WITHOUT
+!* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+!* FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+!* for more details.
+!*
+!* You should have received a copy of the GNU Lesser General Public
+!* License along with FMS.  If not, see <http://www.gnu.org/licenses/>.
+!***********************************************************************
 module mpp_parameter_mod
 #include <fms_platform.h>
 
@@ -15,7 +33,7 @@ module mpp_parameter_mod
   public :: MPP_CLOCK_DETAILED, CLOCK_COMPONENT, CLOCK_SUBCOMPONENT, CLOCK_MODULE_DRIVER
   public :: CLOCK_MODULE, CLOCK_ROUTINE, CLOCK_LOOP, CLOCK_INFRA, MAX_BINS
   public :: EVENT_ALLREDUCE, EVENT_BROADCAST, EVENT_RECV, EVENT_SEND, EVENT_WAIT
-  public :: EVENT_ALLTOALL
+  public :: EVENT_ALLTOALL, EVENT_TYPE_CREATE, EVENT_TYPE_FREE
   public :: DEFAULT_TAG
   public :: COMM_TAG_1,  COMM_TAG_2,  COMM_TAG_3,  COMM_TAG_4
   public :: COMM_TAG_5,  COMM_TAG_6,  COMM_TAG_7,  COMM_TAG_8
@@ -51,6 +69,7 @@ module mpp_parameter_mod
   integer, parameter :: MAX_CLOCKS=400, MAX_EVENT_TYPES=5, MAX_EVENTS=40000
   integer, parameter :: EVENT_ALLREDUCE=1, EVENT_BROADCAST=2, EVENT_RECV=3, EVENT_SEND=4, EVENT_WAIT=5
   integer, parameter :: EVENT_ALLTOALL=6
+  integer, parameter :: EVENT_TYPE_CREATE=7, EVENT_TYPE_FREE=8
   integer, parameter :: MPP_CLOCK_SYNC=1, MPP_CLOCK_DETAILED=2
   integer            :: DEFAULT_TAG = 1
   !--- implimented to centralize _FILL_ values for land_model.F90 into mpp_mod

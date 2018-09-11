@@ -1,3 +1,21 @@
+!***********************************************************************
+!*                   GNU Lesser General Public License
+!*
+!* This file is part of the GFDL Flexible Modeling System (FMS).
+!*
+!* FMS is free software: you can redistribute it and/or modify it under
+!* the terms of the GNU Lesser General Public License as published by
+!* the Free Software Foundation, either version 3 of the License, or (at
+!* your option) any later version.
+!*
+!* FMS is distributed in the hope that it will be useful, but WITHOUT
+!* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+!* FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+!* for more details.
+!*
+!* You should have received a copy of the GNU Lesser General Public
+!* License along with FMS.  If not, see <http://www.gnu.org/licenses/>.
+!***********************************************************************
 subroutine MPP_GATHER_1D_(sbuf, rbuf,pelist)
 ! JWD: Did not create mpp_gather_2d because have no requirement for it
 ! JWD: See mpp_gather_2dv below
@@ -125,7 +143,7 @@ subroutine MPP_GATHER_PELIST_3D_(is, ie, js, je, nk, pelist, array_seg, data, is
    type array3D
      MPP_TYPE_, dimension(:,:,:), allocatable :: data
    endtype array3D
-   type(array3d), dimension(size(pelist)) :: temp
+   type(array3d), dimension(:), allocatable :: temp
 
    if (.not.ANY(mpp_pe().eq.pelist(:))) return
 
@@ -160,6 +178,7 @@ subroutine MPP_GATHER_PELIST_3D_(is, ie, js, je, nk, pelist, array_seg, data, is
 
 ! gather indices into global index on root_pe
    if (is_root_pe) then
+     allocate(temp(1:size(pelist)))
      do i = 1, size(pelist)
 ! root_pe data copy - no send to self
        if (pelist(i).eq.root_pe) then
@@ -211,6 +230,7 @@ subroutine MPP_GATHER_PELIST_3D_(is, ie, js, je, nk, pelist, array_seg, data, is
          deallocate(temp(i)%data)
        endif
      enddo
+     deallocate(temp)
    else
 !    non root_pe's send data to root_pe
      msgsize = (my_ind(2)-my_ind(1)+1) * (my_ind(4)-my_ind(3)+1) * nk
