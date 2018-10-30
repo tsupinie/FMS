@@ -198,7 +198,6 @@
           do i = 1,size(field%axes(:))
              axsiz(i) = field%size(i)
              if( i .EQ. field%time_axis_index )start(i) = tlevel
-
           end do
           if( PRESENT(domain) )then
               call mpp_get_compute_domain( domain, is,  ie,  js,  je, tile_count=tile_count, position=position  )
