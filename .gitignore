@@ -4,4 +4,8 @@
 *.s
 Makefile*
 pathnames*
+*.i90
 
+fv3gfs/qksrt_partition__genmod.f90
+fv3gfs/qksrt_quicksort__genmod.f90
+fv3gfs/makefile.temp.clean
