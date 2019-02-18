@@ -6,6 +6,9 @@ Makefile*
 pathnames*
 *.i90
 
+FMS_INSTALL/
+fv3gfs/depend
+fv3gfs/libfms.a
 fv3gfs/qksrt_partition__genmod.f90
 fv3gfs/qksrt_quicksort__genmod.f90
 fv3gfs/makefile.temp.clean
